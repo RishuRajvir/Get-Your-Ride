@@ -1,7 +1,9 @@
 package com.example.Get.Your.Ride.Service;
 
+import com.example.Get.Your.Ride.DtoResponse.CustomerResponse;
 import com.example.Get.Your.Ride.DtoResponse.TripBookingResponse;
 import com.example.Get.Your.Ride.DtoResquest.TripBookingRequest;
+import com.example.Get.Your.Ride.Enums.TripStatus;
 import com.example.Get.Your.Ride.Exceptions.CabNotAvailableException;
 import com.example.Get.Your.Ride.Exceptions.CustomerNotFoundException;
 import com.example.Get.Your.Ride.Models.Cab;
@@ -12,6 +14,7 @@ import com.example.Get.Your.Ride.Repository.CustomerRepository;
 import com.example.Get.Your.Ride.Repository.DriverRepository;
 import com.example.Get.Your.Ride.Repository.TripBookingRepository;
 import com.example.Get.Your.Ride.Tranform.BookingTranform;
+import com.example.Get.Your.Ride.Tranform.CustomerTranform;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -77,6 +80,31 @@ public class TripBookingService {
                     "cab has been booked successfully with "+ tripBooking.getDriver().getName()+
                     " From "+tripBooking.getPikUp()+" to "+tripBooking.getDropOff()+
                     " Please contact on this number "+tripBooking.getDriver().getMobileNo();
+        SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
+        simpleMailMessage.setFrom("noreply24april@gmail.com");
+        simpleMailMessage.setTo(tripBooking.getCustomers().getEmailId());
+        simpleMailMessage.setSubject("Cab Booked!!!");
+        simpleMailMessage.setText(text);
+
+        // send the email
+        javaMailSender.send(simpleMailMessage);
+    }
+
+    public CustomerResponse cancelTrip(String emailId) {
+            Customers customers = customerRepository.findByEmailId(emailId);
+           TripBooking tripBooking = tripBookingRepository.findById(customers.getCustomerId()).get();
+             tripBooking.getDriver().getCab().setAvailable(true);
+            tripBooking.setTripStatus(TripStatus.CANCELED);
+
+            tripBookingRepository.save(tripBooking);
+            sendMail2(tripBooking);
+            return CustomerTranform.CustomerToCustomerResponse(tripBooking.getCustomers());
+    }
+
+    private void sendMail2(TripBooking tripBooking) {
+        String text = "Dear "+tripBooking.getCustomers().getName()+" Your " +
+                "cab has been Cancelled  successfully " +" Your amount will refund shortly in your " +
+                "source account";
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom("noreply24april@gmail.com");
         simpleMailMessage.setTo(tripBooking.getCustomers().getEmailId());
