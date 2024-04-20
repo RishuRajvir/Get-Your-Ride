@@ -16,7 +16,7 @@ public class CabResponse {
 
     String carType;
 
-    Integer NoOfSeats;
+    Integer noOfSeats;
 
-    double FarePerks;
+    double farePerks;
 }

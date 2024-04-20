@@ -15,15 +15,15 @@ import lombok.experimental.FieldDefaults;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CabRequest {
-    String CabNo;
+    String cabNo;
 
-    String CompanyName;
+    String companyName;
 
     CarType carType;
 
-    Integer NoOfSeats;
+    Integer noOfSeats;
 
-    Integer FarePerks;
+    Integer farePerks;
 
 
 

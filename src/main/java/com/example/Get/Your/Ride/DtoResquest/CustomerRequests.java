@@ -9,7 +9,7 @@ import lombok.experimental.FieldDefaults;
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class CustomerRequests {
-    String MobileNo;
+    String mobileNo;
     String email;
     String name;
     Gender gender;

@@ -14,8 +14,8 @@ public class TripBookingRequest {
             String pickUp;
             String dropOff;
 
-             double TripDistance;
+             double tripDistance;
 
-             String CustomerEmail;
+             String customerEmail;
 
 }

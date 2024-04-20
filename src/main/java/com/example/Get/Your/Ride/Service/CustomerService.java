@@ -38,7 +38,7 @@ public class CustomerService {
 
            CustomerResponse customerResponse = CustomerResponse.builder()
                    .name(Savedcustomers.getName())
-                   .MobileNo(Savedcustomers.getMobileNo()).build();
+                   .mobileNo(Savedcustomers.getMobileNo()).build();
 
             return customerResponse;
         }

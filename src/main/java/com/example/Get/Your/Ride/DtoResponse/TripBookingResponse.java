@@ -15,20 +15,20 @@ import java.util.Date;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class TripBookingResponse {
-    String BookingId;
+    String bookingId;
 
     String pikUp;
 
     String dropOff;
 
-    double TripDistance;
+    double tripDistance;
 
-    double TotalFare;
+    double totalFare;
 
    @Enumerated(value = EnumType.STRING)
     TripStatus tripStatus;
 
-    Date BookAt;
+    Date bookAt;
 
    CustomerResponse customerResponse;
 

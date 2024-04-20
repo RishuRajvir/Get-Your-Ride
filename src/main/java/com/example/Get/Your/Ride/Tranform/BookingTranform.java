@@ -12,21 +12,21 @@ public class BookingTranform {
         public static TripBooking bookingRequestToBooking(TripBookingRequest tripBookingRequest){
 
                     return  TripBooking.builder()
-                            .BookingId(String.valueOf(UUID.randomUUID()))
+                            .bookingId(String.valueOf(UUID.randomUUID()))
                             .pikUp(tripBookingRequest.getPickUp())
                             .dropOff(tripBookingRequest.getDropOff())
-                            .TripDistance(tripBookingRequest.getTripDistance())
+                            .tripDistance(tripBookingRequest.getTripDistance())
                             .TripStatus(TripStatus.IN_TRANSACTION).build();
         }
         public  static TripBookingResponse bookingToBookingResponse(TripBooking tripBooking){
 
                     return TripBookingResponse.builder()
-                            .BookingId(tripBooking.getBookingId())
+                            .bookingId(tripBooking.getBookingId())
                             .pikUp(tripBooking.getPikUp())
                             .dropOff(tripBooking.getDropOff())
-                            .TripDistance(tripBooking.getTripDistance())
-                            .TotalFare(tripBooking.getTotalFare())
-                            .BookAt(tripBooking.getBookAt())
+                            .tripDistance(tripBooking.getTripDistance())
+                            .totalFare(tripBooking.getTotalFare())
+                            .bookAt(tripBooking.getBookAt())
                             .tripStatus(tripBooking.getTripStatus())
                             .customerResponse(CustomerTranform.CustomerToCustomerResponse(tripBooking.getCustomers()))
                             .driverResponse(DriverTransform.driverResponse(tripBooking.getDriver())).build();

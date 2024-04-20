@@ -11,12 +11,12 @@ public class CustomerTranform {
                         return Customers.builder().name(customerRequests.getName())
                                 .emailId(customerRequests.getEmail())
                                 .gender(customerRequests.getGender())
-                                .MobileNo(customerRequests.getMobileNo()).build();
+                                .mobileNo(customerRequests.getMobileNo()).build();
             }
             public static CustomerResponse CustomerToCustomerResponse(Customers customers){
                 return CustomerResponse.builder()
                         .name(customers.getName())
-                        .MobileNo(customers.getMobileNo())
+                        .mobileNo(customers.getMobileNo())
                         .email(customers.getEmailId())
                         .build();
             }

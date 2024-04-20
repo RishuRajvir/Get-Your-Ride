@@ -11,6 +11,6 @@ import lombok.experimental.FieldDefaults;
 @Builder
 public class CustomerResponse {
         String name;
-        String MobileNo;
+        String mobileNo;
         String email;
 }
