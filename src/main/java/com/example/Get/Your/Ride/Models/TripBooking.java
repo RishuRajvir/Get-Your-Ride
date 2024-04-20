@@ -23,21 +23,21 @@ public class TripBooking {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
 
-    String BookingId;
+    String bookingId;
 
     String pikUp;
 
     String dropOff;
 
-    double TripDistance;
+    double tripDistance;
 
-    double TotalFare;
+    double totalFare;
 
     @Enumerated(value = EnumType.STRING)
     TripStatus TripStatus;
 
     @CreationTimestamp
-    Date BookAt;
+    Date bookAt;
 
     @ManyToOne
     @JoinColumn

@@ -21,10 +21,10 @@ public class Customers {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer CustomerId;
+    Integer customerId;
 
     @Column(unique = true)
-    String MobileNo;
+    String mobileNo;
 
     @Column(unique = true)
     String emailId;

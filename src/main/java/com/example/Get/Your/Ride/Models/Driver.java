@@ -20,7 +20,7 @@ public class Driver {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer DriverId;
+    Integer driverId;
 
     String name;
 

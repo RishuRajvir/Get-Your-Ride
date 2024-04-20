@@ -18,21 +18,21 @@ public class Cab {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer CabId;
+    Integer cabId;
 
     @Column(unique = true,nullable = false)
-    String CabNo;
+    String cabNo;
 
-    String CompanyName;
+    String companyName;
 
     @Enumerated(value =  EnumType.STRING)
     CarType carType;
 
-    Integer NoOfSeats;
+    Integer noOfSeats;
 
     boolean isAvailable;
 
-    Integer  FarePerks;
+    Integer  farePerks;
 
     @OneToOne
     @JoinColumn(name = "DriverId")

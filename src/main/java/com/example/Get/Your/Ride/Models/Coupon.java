@@ -16,9 +16,9 @@ public class Coupon {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer CouponId;
+    Integer couponId;
 
-    String CouponCode;
+    String couponCode;
 
-    Integer Discount;
+    Integer discount;
 }
