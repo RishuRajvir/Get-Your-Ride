@@ -24,12 +24,11 @@ public class TripBookingController {
             @RequestBody TripBookingRequest tripBookingRequest){
             TripBookingResponse response = tripBookingService.bookCab(coupon,tripBookingRequest);
             return new ResponseEntity<TripBookingResponse>(response, HttpStatus.CREATED);
-
     }
     @GetMapping("/cancel/{emailId}")
-    public CustomerResponse cancelCab(@PathVariable String emailId ){
-            return tripBookingService.cancelTrip(emailId);
+    public CustomerResponse cancelCab(@PathVariable String emailId , @RequestParam(value = "No.ofBooking",required = false)
+                            Integer no ){
+            return tripBookingService.cancelTrip(emailId,no);
     }
-
 
 }

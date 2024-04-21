@@ -1,5 +1,6 @@
 package com.example.Get.Your.Ride.DtoResponse;
 
+import com.example.Get.Your.Ride.Enums.TripStatus;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -13,4 +14,5 @@ public class CustomerResponse {
         String name;
         String mobileNo;
         String email;
+        TripStatus tripStatus;
 }

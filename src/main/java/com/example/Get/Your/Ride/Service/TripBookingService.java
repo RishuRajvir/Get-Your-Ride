@@ -20,6 +20,9 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class TripBookingService {
 
@@ -90,15 +93,21 @@ public class TripBookingService {
         javaMailSender.send(simpleMailMessage);
     }
 
-    public CustomerResponse cancelTrip(String emailId) {
-            Customers customers = customerRepository.findByEmailId(emailId);
-           TripBooking tripBooking = tripBookingRepository.findById(customers.getCustomerId()).get();
-             tripBooking.getDriver().getCab().setAvailable(true);
-            tripBooking.setTripStatus(TripStatus.CANCELED);
+    public CustomerResponse cancelTrip(String emailId,Integer no) {
 
-            tripBookingRepository.save(tripBooking);
-            sendMail2(tripBooking);
-            return CustomerTranform.CustomerToCustomerResponse(tripBooking.getCustomers());
+            Customers customers = customerRepository.findByEmailId(emailId);
+
+            List<TripBooking> tripBookingList = customers.getTripBookings();
+            String id = tripBookingList.get(no+1).getBookingId();
+            TripBooking tripBooking = tripBookingRepository.findByID(id);
+            int id1 = tripBooking.getId();
+            TripBooking tripBooking1 = tripBookingRepository.findById(id1).get();
+            tripBooking1.getDriver().getCab().setAvailable(true);
+            tripBooking1.setTripStatus(TripStatus.CANCELED);
+
+            tripBookingRepository.save(tripBooking1);
+            sendMail2(tripBooking1);
+            return CustomerTranform.CustomerToCustomerResponse(tripBooking1.getCustomers());
     }
 
     private void sendMail2(TripBooking tripBooking) {
@@ -108,7 +117,7 @@ public class TripBookingService {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom("noreply24april@gmail.com");
         simpleMailMessage.setTo(tripBooking.getCustomers().getEmailId());
-        simpleMailMessage.setSubject("Cab Booked!!!");
+        simpleMailMessage.setSubject("Cab Cancelled!!!");
         simpleMailMessage.setText(text);
 
         // send the email

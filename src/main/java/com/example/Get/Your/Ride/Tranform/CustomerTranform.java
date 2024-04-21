@@ -2,6 +2,7 @@ package com.example.Get.Your.Ride.Tranform;
 
 import com.example.Get.Your.Ride.DtoResponse.CustomerResponse;
 import com.example.Get.Your.Ride.DtoResquest.CustomerRequests;
+import com.example.Get.Your.Ride.Enums.TripStatus;
 import com.example.Get.Your.Ride.Models.Customers;
 
 public class CustomerTranform {
@@ -11,7 +12,8 @@ public class CustomerTranform {
                         return Customers.builder().name(customerRequests.getName())
                                 .emailId(customerRequests.getEmail())
                                 .gender(customerRequests.getGender())
-                                .mobileNo(customerRequests.getMobileNo()).build();
+                                .mobileNo(customerRequests.getMobileNo())
+                                .build();
             }
             public static CustomerResponse CustomerToCustomerResponse(Customers customers){
                 return CustomerResponse.builder()

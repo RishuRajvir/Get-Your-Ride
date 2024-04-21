@@ -29,6 +29,7 @@ public class BookingTranform {
                             .bookAt(tripBooking.getBookAt())
                             .tripStatus(tripBooking.getTripStatus())
                             .customerResponse(CustomerTranform.CustomerToCustomerResponse(tripBooking.getCustomers()))
-                            .driverResponse(DriverTransform.driverResponse(tripBooking.getDriver())).build();
+                            .driverResponse(DriverTransform.driverResponse(tripBooking.getDriver()))
+                            .build();
         }
 }
