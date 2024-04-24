@@ -20,7 +20,7 @@ public class TripBookingController {
 
     @PostMapping("/book")
     public ResponseEntity<TripBookingResponse> bookCab(@RequestParam(value = "coupon",
-                required = false,defaultValue = "false")boolean coupon,
+                required = false,defaultValue = "false")String coupon,
             @RequestBody TripBookingRequest tripBookingRequest){
             TripBookingResponse response = tripBookingService.bookCab(coupon,tripBookingRequest);
             return new ResponseEntity<TripBookingResponse>(response, HttpStatus.CREATED);

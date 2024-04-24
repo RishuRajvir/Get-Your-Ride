@@ -19,7 +19,8 @@ public class CabTransform {
                 return CabResponse.builder()
                         .cabNo(cab.getCabNo())
                         .noOfSeats(cab.getNoOfSeats())
-                        .farePerks(cab.getFarePerks()).carType(cab.getCarType().toString())
+                        .farePerks(cab.getFarePerks())
+                        .carType(cab.getCarType().toString())
                         .build();
         }
 }

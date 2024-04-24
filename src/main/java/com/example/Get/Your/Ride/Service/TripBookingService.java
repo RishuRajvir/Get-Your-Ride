@@ -7,12 +7,10 @@ import com.example.Get.Your.Ride.Enums.TripStatus;
 import com.example.Get.Your.Ride.Exceptions.CabNotAvailableException;
 import com.example.Get.Your.Ride.Exceptions.CustomerNotFoundException;
 import com.example.Get.Your.Ride.Models.Cab;
+import com.example.Get.Your.Ride.Models.Coupon;
 import com.example.Get.Your.Ride.Models.Customers;
 import com.example.Get.Your.Ride.Models.TripBooking;
-import com.example.Get.Your.Ride.Repository.CabRepository;
-import com.example.Get.Your.Ride.Repository.CustomerRepository;
-import com.example.Get.Your.Ride.Repository.DriverRepository;
-import com.example.Get.Your.Ride.Repository.TripBookingRepository;
+import com.example.Get.Your.Ride.Repository.*;
 import com.example.Get.Your.Ride.Tranform.BookingTranform;
 import com.example.Get.Your.Ride.Tranform.CustomerTranform;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +35,8 @@ public class TripBookingService {
 
     @Autowired
     DriverRepository driverRepository;
+    @Autowired
+    CouponRepository couponRepository;
 
     private  final JavaMailSender javaMailSender;
 
@@ -44,7 +44,14 @@ public class TripBookingService {
         this.javaMailSender = javaMailSender;
     }
 
-    public TripBookingResponse bookCab(boolean coupon, TripBookingRequest tripBookingRequest) {
+    public TripBookingResponse bookCab(String coupon, TripBookingRequest tripBookingRequest) {
+
+        double val = 0;
+        Coupon coupon1 = couponRepository.findByCouponCode(coupon);
+        if(coupon1 != null) {
+            val = ((double) coupon1.getDiscount() )/ 100;
+
+        }
 
         Customers customers = customerRepository.findByEmailId(tripBookingRequest.getCustomerEmail());
             if(customers == null)
@@ -56,7 +63,13 @@ public class TripBookingService {
                 throw  new CabNotAvailableException("All Drivers are Busy Now");
             }
         TripBooking tripBooking = BookingTranform.bookingRequestToBooking(tripBookingRequest);
-        tripBooking.setTotalFare(cab.getFarePerks()* tripBooking.getTripDistance());
+            double total =  val;
+
+        if(coupon1 != null)
+            tripBooking.setTotalFare((cab.getFarePerks() * tripBooking.getTripDistance())*val);
+        else
+            tripBooking.setTotalFare((cab.getFarePerks() * tripBooking.getTripDistance()));
+
 
 
         tripBooking.setCustomers(customers);
