@@ -20,7 +20,7 @@ import java.util.List;
 public class Customers {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer customerId;
 
     @Column(unique = true)

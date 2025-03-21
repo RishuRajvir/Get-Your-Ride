@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class TripBookingService {
@@ -49,7 +50,7 @@ public class TripBookingService {
         double val = 0;
         Coupon coupon1 = couponRepository.findByCouponCode(coupon);
         if(coupon1 != null) {
-            val = ((double) coupon1.getDiscount() )/ 100;
+            val = ((double) coupon1.getDiscount())/100;
 
         }
 
@@ -92,10 +93,13 @@ public class TripBookingService {
     }
 
     private void sendMail(TripBooking tripBooking) {
+        Random random = new Random();
+        int otp = 1000 + random.nextInt(9000);
             String text = "Dear "+tripBooking.getCustomers().getName()+" Your " +
                     "cab has been booked successfully with "+ tripBooking.getDriver().getName()+
                     " From "+tripBooking.getPikUp()+" to "+tripBooking.getDropOff()+
-                    " Please contact on this number "+tripBooking.getDriver().getMobileNo();
+                    " Please contact on this number "+tripBooking.getDriver().getMobileNo()
+                    +"  This is your OTP "+otp+" and Don't share this OTP ";
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom("noreply24april@gmail.com");
         simpleMailMessage.setTo(tripBooking.getCustomers().getEmailId());

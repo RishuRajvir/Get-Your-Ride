@@ -51,14 +51,15 @@ public class DriverService {
         public Driver getDriver(String MobNo){
            return driverRepository.findByMobileNo(MobNo);
         }
-
-    public List<Driver> getDrivers() {
+        public List<Driver> getDrivers() {
         return driverRepository.findByRating();
     }
-
-    public String update(double rating, String mobileNo) {
+        public String update(double rating, String mobileNo) {
             Driver driver = driverRepository.findByMobileNo(mobileNo);
-            driver.setRating(rating);
+            double n = driver.getRating();
+            double new_rat = (n+rating)/2;
+
+            driver.setRating(new_rat);
             driverRepository.save(driver);
             return "Rating has been Updated";
     }

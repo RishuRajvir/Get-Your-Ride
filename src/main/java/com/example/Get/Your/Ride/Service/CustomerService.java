@@ -19,12 +19,12 @@ public class CustomerService {
 
             private  final CustomerRepository customerRepository;
 
-    public CustomerService(CustomerRepository customerRepository, JavaMailSender javaMailSender) {
+        public CustomerService(CustomerRepository customerRepository, JavaMailSender javaMailSender) {
         this.customerRepository = customerRepository;
         this.javaMailSender = javaMailSender;
     }
 
-    public final JavaMailSender javaMailSender;
+        public final JavaMailSender javaMailSender;
 
         public CustomerResponse addCustomer(CustomerRequests customerRequest){
 
@@ -43,7 +43,7 @@ public class CustomerService {
             return customerResponse;
         }
 
-    private void sendmail(Customers savedcustomers) {
+        private void sendmail(Customers savedcustomers) {
 
                 String text = " Thank you " + savedcustomers.getName()+" And Your Registered Mobile No is "+savedcustomers.getMobileNo()+
                         " To be the part of Our Family\n" +
@@ -62,7 +62,7 @@ public class CustomerService {
 
     }
 
-    public List<CustomerResponse> findCustomers(String gender) {
+        public List<CustomerResponse> findCustomers(String gender) {
                 List<Customers>  customers = customerRepository.findByGender(gender);
             List<CustomerResponse> customerResponses = new ArrayList<>();
             for(Customers customers1 : customers){
