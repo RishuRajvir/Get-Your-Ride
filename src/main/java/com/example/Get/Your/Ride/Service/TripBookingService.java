@@ -53,7 +53,6 @@ public class TripBookingService {
             val = ((double) coupon1.getDiscount())/100;
 
         }
-
         Customers customers = customerRepository.findByEmailId(tripBookingRequest.getCustomerEmail());
             if(customers == null)
             {
